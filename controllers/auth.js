@@ -240,7 +240,7 @@ exports.getNewPassword = (req, res, next) => {
         path: '/new-password',
         pageTitle: 'New Password',
         errorMessage: message,
-        userId: user._id.toString(),
+        userId: result._id.toString(),
         passwordToken: token
       });
     })
@@ -253,8 +253,23 @@ exports.getNewPassword = (req, res, next) => {
 
 exports.postNewPassword = (req, res, next) => {
   const newPassword = req.body.password;
+  const errors = validationResult(req);
   const userId = req.body.userId;
   const passwordToken = req.body.passwordToken;
+  
+  if (!errors.isEmpty()) {
+    const message = errors.array()[0].msg;
+    return res.status(422)
+      .render('auth/new-password', {
+        path: '/new-password',
+        pageTitle: 'New Password',
+        errorMessage: message,
+        userId: userId,
+        passwordToken: passwordToken
+      });
+  }
+  
+ 
   let resetUser;
 
   User.findOne({ resetToken: passwordToken, _id: userId, resetTokenExpiration: { $gt: Date.now() } })

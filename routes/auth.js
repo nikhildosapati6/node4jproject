@@ -53,7 +53,12 @@ router.post('/logout', authController.postLogout);
 
 router.post('/reset', authController.postReset);
 
-router.post('/new-password', authController.postNewPassword);
+router.post('/new-password',
+    body('password', 'Please enter a password with only text and number of atleast 5 characters')
+        .isLength({ min: 5 })
+        .isAlphanumeric()
+        .trim()
+    , authController.postNewPassword);
 
 
 module.exports = router;
