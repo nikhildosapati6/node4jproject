@@ -1,0 +1,11 @@
+{
+    "env": {
+        "MONGODB_USERNAME": "nikhildosapati6",
+        "MONGODB_PASSWORD": "nikhil",
+        "MONGODB_DATABASE": "shop",
+        "PORT": 3000,
+        "STRIPE_KEY": "sk_test_z2OUfvrU7xRB6Q8Pk1Q7k8kz",
+        "NODEMAILER_EMAIL": "nodejsshoppingproject@gmail.com",
+        "NODEMAILER_PASSWORD": "nikhil@1"
+    }
+}
