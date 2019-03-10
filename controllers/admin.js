@@ -1,6 +1,7 @@
 const Product = require('../models/product');
 const { validationResult } = require('express-validator/check');
 const fileHelper = require('../util/file');
+const fs = require('fs');
 
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {
@@ -175,7 +176,9 @@ exports.deleteProduct = (req, res, next) => {
     .then(product => {
       if (!product)
         return next(new Error('Product Not Found'));
-      fileHelper.deleteFile(product.imageUrl);
+      if (fs.existsSync(product.imageUrl)) {
+        fileHelper.deleteFile(product.imageUrl);
+      }
       return Product.deleteOne({ _id: prodId, userId: req.user._id })
     })
     .then(() => {
