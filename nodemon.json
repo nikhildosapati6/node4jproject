@@ -6,6 +6,7 @@
         "PORT": 3000,
         "STRIPE_KEY": "sk_test_z2OUfvrU7xRB6Q8Pk1Q7k8kz",
         "NODEMAILER_EMAIL": "nodejsshoppingproject@gmail.com",
-        "NODEMAILER_PASSWORD": "nikhil@1"
+        "NODEMAILER_PASSWORD": "nikhil@1",
+        "PROJECT_NAME":"localhost:3000"
     }
 }
