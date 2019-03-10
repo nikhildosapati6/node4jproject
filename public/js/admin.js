@@ -13,15 +13,15 @@ const deleteProduct = (btn) => {
     }).then(data => {
         console.log(data);
         productElement.parentNode.removeChild(productElement);
-        let cardsLength = document.getElementsByClassName('card').length;
-        console.log('length:',cardsLength);
-        if(cardsLength === 0){
-            let para = document.createElement("H1");
-            let node = document.createTextNode("No products Found!");
-            para.appendChild(node);
-            var element = document.getElementById("main");
-            element.appendChild(para);
-        }
+        // let cardsLength = document.getElementsByClassName('card').length;
+        // console.log('length:',cardsLength);
+        // if(cardsLength === 0){
+        //     let para = document.createElement("H1");
+        //     let node = document.createTextNode("No products Found!");
+        //     para.appendChild(node);
+        //     var element = document.getElementById("main");
+        //     element.appendChild(para);
+        // }
     }).catch(err => {
         console.log(err);
     });
