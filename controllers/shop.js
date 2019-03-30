@@ -95,10 +95,16 @@ exports.getCart = (req, res, next) => {
     .execPopulate()
     .then(user => {
       const products = user.cart.items;
+      var updatedProducts = products.filter(p => {
+        if (p.productId === null) {
+          return false;
+        }
+        return true;
+      })
       res.render('shop/cart', {
         path: '/cart',
         pageTitle: 'Your Cart',
-        products: products
+        products: updatedProducts
       });
     })
     .catch(err => {
@@ -147,14 +153,23 @@ exports.getCheckout = (req, res, next) => {
       const products = user.cart.items;
       let total = 0;
 
-      products.forEach(p => {
+      var updatedProducts = products.filter(
+        p => {
+          if (p.productId === null)
+            return false;
+          return true;
+        }
+      )
+
+      updatedProducts.forEach(p => {
         total += p.quantity * p.productId.price;
       });
+
 
       res.render('shop/checkout', {
         path: '/checkout',
         pageTitle: 'Checkout',
-        products: products,
+        products: updatedProducts,
         totalSum: total
       });
     })
@@ -173,17 +188,30 @@ exports.postOrder = (req, res, next) => {
     .execPopulate()
     .then(user => {
       user.cart.items.forEach(p => {
-        totalSum += p.quantity * p.productId.price;
+        if (p.productId !== null)
+          totalSum += p.quantity * p.productId.price;
       })
       const products = user.cart.items.map(i => {
-        return { quantity: i.quantity, product: { ...i.productId._doc } };
+        if (i.productId !== null)
+          return { quantity: i.quantity, product: { ...i.productId._doc } };
+        else
+          return { quantity: i.quantity, product: { productId: null } };
       });
+
+      var updatedProducts = products.filter(
+        p => {
+          if (p.product.productId === null) {
+            return false
+          }
+          return true;
+        }
+      )
       const order = new Order({
         user: {
           email: req.user.email,
           userId: req.user
         },
-        products: products
+        products: updatedProducts
       });
       return order.save();
     })

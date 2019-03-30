@@ -2,6 +2,12 @@ const Product = require('../models/product');
 const { validationResult } = require('express-validator/check');
 const fileHelper = require('../util/file');
 const fs = require('fs');
+// const AWS = require('aws-sdk');
+
+// const s3 = new AWS.S3({
+//   accessKeyId: process.env.AWS_ACCESS_KEY,
+//   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+// })
 
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {

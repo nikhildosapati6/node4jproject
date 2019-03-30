@@ -8,6 +8,8 @@
         "NODEMAILER_EMAIL": "nodejsshoppingproject@gmail.com",
         "NODEMAILER_PASSWORD": "nikhil@1",
         "PROJECT_NAME":"localhost:3000",
-        "PROTOCOL":"http"
+        "PROTOCOL":"http",
+        "AWS_ACCESS_KEY":"AKIAJE5NPHNU2FOM2EVA",
+        "AWS_SECRET_ACCESS_KEY":"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"
     }
 }
